@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type respCallBack func(resp *http.Response, err error)
@@ -44,7 +45,9 @@ type Client struct {
 }
 
 var defaultClient = &Client{
-	client: &http.Client{},
+	client: &http.Client{
+		Timeout: 5 * time.Second,
+	},
 	headers: headers{
 		"Content-Type": "application/json",
 	},
